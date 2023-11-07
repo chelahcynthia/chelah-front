@@ -1,5 +1,12 @@
 
 import './App.css';
+import Login from "./components/authentication/Login";
+import Register from "./components/authentication/Register";
+import Home from "./components/dashboard/Home";
+import { Route, Routes, Outlet } from "react-router-dom";
+import Navbar from "./components/dashboard/Navbar";
+import SideBar from "./components/dashboard/SideBar";
+
 
 function App() {
   return (

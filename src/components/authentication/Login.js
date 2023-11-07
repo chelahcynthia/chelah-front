@@ -1,5 +1,7 @@
 import React from 'react'
 import realestate from "../../assets/realestate.png";
+import { Link } from 'react-router-dom';
+
 
 const Login = () => {
   return (
@@ -11,12 +13,12 @@ const Login = () => {
       <h1 className="text-4xl  text-black font-bold font-serif">Real-Estate Demo</h1> <br />
       <form onSubmit={(e)=>{
         e.preventDefault()
-        handleOnLogin()
+        // handleOnLogin()
       }} className=" mt-4  bg-white rounded-lg sm:w-96 text-left p-8 ">
         <label htmlFor="username"className="block font-semibold">Username</label>
         <input 
         id="username"
-        value={logins.username}
+        // value={logins.username}
         placeholder="Username"
         className="border  h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-sky-400 rounded-md"
         // onChange={(e)=>setLogins(logins=>({...logins, username: e.target.value}))}
@@ -26,7 +28,7 @@ const Login = () => {
         id="password"
           className="border  h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-sky-400 rounded-md"
           placeholder="Password"
-          value={logins.password} 
+        //   value={logins.password} 
           type="password" 
         //   onChange={(e)=>setLogins(logins=>({...logins, password: e.target.value}))}
         />
@@ -36,14 +38,18 @@ const Login = () => {
             // onClick={handleOnLogin}
             className="mt-8 bg-blue-500 text-white py-2 px-16 rounded-full hover:bg-blue-700"
           >
-            Sign In
+            Log In
           </button>{" "}
           <br /> <br />
-          <a href src="" text="" className="flex justify-centre text-blue-400">
-            Forgot Password?
-          </a>
+          
         </div>
       </form>
+      <p className="text-blue-500 hover:text-blue-600">
+        Don't have an account?{" "}
+        <Link className="rlink" to="/Register">
+          Register here
+        </Link>
+      </p>
     </div>
         </div>
   )
