@@ -7,7 +7,7 @@ import ProtectRoutes from "./components/ProtectRoutes";
 import { useState } from "react";
 
 function App() {
-  const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
+  const [userIsAuthenticated, setUserIsAuthenticated] = useState(true);
 
   return (
     <div className="App">
