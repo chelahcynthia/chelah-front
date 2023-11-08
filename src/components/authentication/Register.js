@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import realestate from "../../assets/realestate.png";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -81,6 +82,12 @@ const Register = () => {
         <br /> <br />
         </div>
     </form>
+    <p className="text-blue-500 hover:text-blue-600">
+    Already have an account?{" "}
+        <Link className="rlink" to="/Login">
+          Login
+        </Link>
+      </p>
     
   </div>
       </div>

@@ -1,9 +1,35 @@
-import React from 'react'
+import React, { useState }from 'react'
 import realestate from "../../assets/realestate.png";
 import { Link } from 'react-router-dom';
 
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+
+    fetch("http://localhost:4000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }).then((res) => {
+      if (res.ok) {
+        console.log("success");
+        console.log(res.headers.get("access-token"));
+        console.log(res.headers);
+        
+      }
+    });
+  };
+
   return (
     <div className="flex flex-col justify-center items-center w-full h-[100vh]">
       <div className="flex flex-col items-center justify-center border shadow-lg rounded-lg p-5">
@@ -11,14 +37,18 @@ const Login = () => {
       <img src={realestate} className="h-40" alt="ima" />
       </div>
       <h1 className="text-4xl  text-black font-bold font-serif">Log In Here!</h1> <br />
-      <form onSubmit={(e)=>{
-        e.preventDefault()
-        }} className=" mt-4  bg-white rounded-lg sm:w-96 text-left p-8 ">
+      <form onSubmit={e => handleSubmit(e)} 
+    className="mt-4 bg-white rounded-lg sm:w-96 text-left p-8"
+        >
 
         <label htmlFor="username"className="block font-semibold">Username</label>
         <input 
-        id="username"
-        placeholder="Username"
+        type="email"
+        name=""
+        required
+        placeholder="Email"
+        onChange={(e) =>
+          setFormData({ ...formData, email: e.target.value })}
         className="border  h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-sky-400 rounded-md"
         />
         
@@ -29,6 +59,9 @@ const Login = () => {
           className="border  h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-sky-400 rounded-md"
           placeholder="Password"
           type="password" 
+          onChange={(e) =>
+            setFormData({ ...formData, password: e.target.value })
+          }
         />
 
         <div className="">
