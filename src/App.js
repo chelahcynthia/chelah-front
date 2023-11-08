@@ -1,38 +1,35 @@
-
-import './App.css';
+import "./App.css";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import Home from "./components/dashboard/Home";
 import { Route, Routes, Outlet } from "react-router-dom";
-import Navbar from "./components/dashboard/Navbar";
-import SideBar from "./components/dashboard/SideBar";
-
+import ProtectRoutes from "./components/ProtectRoutes";
+import { useState } from "react";
 
 function App() {
+  const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
+
   return (
     <div className="App">
-     
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route
-            path="/home"
-            element={
-              <div className="flex w-full justify-between">
-                <SideBar />
-                <div className="grow h-[100vh]">
-                  <Navbar />
-                  <Outlet />
-                </div>
-              </div>
-            }
-          >
-            
-            <Route path="/home" element={<Home />} />
-          </Route>
-        </Routes>
-      
-      
+      <Routes>
+        <Route
+          path="/login"
+          element={<Login isAuthenticated={userIsAuthenticated} />}
+        />
+        <Route
+          path="register"
+          element={<Register isAuthenticated={userIsAuthenticated} />}
+        />
+        <Route
+          path="/"
+          element={
+            <ProtectRoutes
+              isAuthenticated={userIsAuthenticated}
+              Component={Home}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 }
