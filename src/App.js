@@ -4,21 +4,31 @@ import Register from "./components/authentication/Register";
 import Home from "./components/dashboard/Home";
 import { Route, Routes, Outlet } from "react-router-dom";
 import ProtectRoutes from "./components/ProtectRoutes";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useLocalStorage from "./hooks/useLocalstorage";
+import { useNavigate } from "react-router-dom";
 
 function App() {
-  const [userIsAuthenticated, setUserIsAuthenticated] = useState(true);
+  const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
+  const navigate = useNavigate()
 
+  useEffect(()=>{
+    if(userIsAuthenticated){
+      navigate("/")
+    }
+  },[userIsAuthenticated])
+
+  
   return (
     <div className="App">
       <Routes>
         <Route
           path="/login"
-          element={<Login isAuthenticated={userIsAuthenticated} />}
+          element={<Login setUserIsAuthenticated={setUserIsAuthenticated} isAuthenticated={userIsAuthenticated} />}
         />
         <Route
           path="register"
-          element={<Register isAuthenticated={userIsAuthenticated} />}
+          element={<Register setUserIsAuthenticated={setUserIsAuthenticated} isAuthenticated={userIsAuthenticated} />}
         />
         <Route
           path="/"

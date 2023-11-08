@@ -1,14 +1,13 @@
 import React, {useState} from 'react'
 import realestate from "../../assets/realestate.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Register = ({setUserIsAuthenticated}) => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
    });
-
    const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
@@ -21,8 +20,9 @@ const Register = () => {
       body: JSON.stringify(formData),
     }).then((res) => {
       if (res.ok) {
-        console.log("success");
+        res.json().then(console.log)
       }
+      setUserIsAuthenticated(true)
       console.log(res.headers.get("access-token"));
       return res;
     });

@@ -1,15 +1,14 @@
 import React, { useState }from 'react'
 import realestate from "../../assets/realestate.png";
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 
-const Login = () => {
+const Login = ({setUserIsAuthenticated}) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
@@ -22,11 +21,12 @@ const Login = () => {
       body: JSON.stringify(formData),
     }).then((res) => {
       if (res.ok) {
+        res.json().then(console.log)
         console.log("success");
+        setUserIsAuthenticated(true)
         console.log(res.headers.get("access-token"));
         console.log(res.headers);
-        
-      }
+        }
     });
   };
 
@@ -41,7 +41,7 @@ const Login = () => {
     className="mt-4 bg-white rounded-lg sm:w-96 text-left p-8"
         >
 
-        <label htmlFor="username"className="block font-semibold">Username</label>
+        <label htmlFor="username"className="block font-semibold">Email</label>
         <input 
         type="email"
         name=""
